@@ -1,0 +1,137 @@
+
+.header-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff; 
+    border-bottom: 1px solid #ddd; /* Optional: adds a bottom border for separation */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    padding: 10px 20px;
+}
+.header-container hr{
+    margin: 10px 0px;
+    height: 2px;
+    background-color: #e2e2e2;
+    border: none;
+}
+.header-container .logo-image{
+    margin-left: 210px;
+    margin-top: 10px;
+}
+.header-container .logo-image img{
+    width: 50px;
+    height: 30px;
+}
+
+.header-container .logo-image img:hover{
+    transform: translateY(-4px); 
+}
+.custom-menu .ant-menu-item {
+    transition: background-color 0.3s ease, border-radius 0.3s ease, transform 0.3s ease; /* Smooth transition for background color, border-radius, and transform */
+
+  }
+
+.custom-menu .ant-menu-item {
+    margin-right:  50px;
+    border-radius: 100px; /* Optional: add a slight border-radius for the default state */
+  }
+  .custom-menu .ant-menu-item::after {
+    border-bottom: none !important; /* Remove the original hover underline */
+  }
+.custom-menu .ant-menu-item:hover {
+    background-color:  #87cefa !important; /* Background color on hover */
+    border-radius: 30px;
+    transform: translateY(-4px); /* Move text slightly upwards */
+
+  }
+.header-right{
+    margin-top: 6px;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+  }
+  .header-right .header_address{
+    margin-top: 10px;
+    width: 200px;
+    height: 20px;
+    padding-left: 3px;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden;
+    white-space: nowrap; /* Prevent the text from wrapping to the next line */
+    text-overflow: ellipsis;
+  }
+  .header-right .header_address:hover{
+    background-color: #87cefa !important;
+    transform: translateY(-4px); /* Move text slightly upwards */
+    transition: background-color 0.3s ease, border-radius 0.3s ease, transform 0.3s ease; /* Smooth transition for background color, border-radius, and transform */
+
+  }
+  .header-right-connected{
+    display: flex;
+    gap: 50px;
+  }
+
+  .header-right .metamask_logo{
+    width: 30px;
+    height: 30px;
+  }
+  
+  .header-right .metamask_logo:hover{
+    transform: translateY(-4px); /* Move text slightly upwards */
+
+  }
+  .header-right .avatar{
+    cursor: pointer;
+    width: 50px;
+    height: 40px;
+    border-radius: 50%;
+    border: #007bff solid 1px;
+  }
+
+  .header-right .avatar:hover{
+    
+    background-color: #87cefa  !important;
+    transform: translateY(-4px); /* Move text slightly upwards */
+
+  }
+
+  .login-button {
+    background-color: white;
+    height: 30px;
+    width: 70px;
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Larger text size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, border-radius 0.3s ease, transform 0.3s ease; /* Smooth transition for background color, border-radius, and transform */
+  }
+  
+  .login-button:hover {
+    background-color: #87cefa; /* Darker blue on hover */
+    transform: translateY(-4px); /* Move text slightly upwards */
+
+  }
+  
+  .login-button:focus {
+    outline: none; /* Remove outline on focus */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Add a shadow on focus for accessibility */
+  }
+
+  .profile_button {
+    transition: background-color 0.3s ease, border-radius 0.3s ease, transform 0.3s ease; /* Smooth transition for background color, border-radius, and transform */
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 4px;
+  }
+  
+  .profile_button:hover {
+    background-color: #87cefa;
+    border-radius: 20px;
+    transition: background-color 0.3s ease, border-radius 0.3s ease, transform 0.3s ease; /* Smooth transition for background color, border-radius, and transform */
+  }

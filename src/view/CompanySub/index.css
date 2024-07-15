@@ -1,0 +1,131 @@
+.company_sub_container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+.company_base_info{
+    background-color: #ffffff;
+    padding-top: 50px;
+    padding-left: 50px;
+    width: 1260px;
+    height: 250px;
+    margin-top: 100px;
+    margin-left: 90px;
+    display: flex;
+    flex-direction: row;
+    gap: 70px;
+}
+
+.company_sub_container .company_base_info img{
+    cursor: pointer;
+    width: 300px;
+    height: 150px;
+    border-radius: 10%;
+}
+
+.company_sub_container .company_base_info img:hover{
+    transform: translateY(-4px); /* Move text slightly upwards */
+
+}
+
+.company_base_info .company_name{
+    cursor: pointer;
+    margin-top: 40px;
+    font-weight: 1000;
+    font-size: 50px;
+}
+
+.company_base_info .company_name:hover{
+    transform: translateY(-4px);
+    color: #007bff;
+}
+
+.company_base_info .company_base_btn{
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Larger text size */
+    cursor: pointer; 
+    color: #ffffff;
+    background-color: darkblue;
+    margin-top: 120px;
+    width: 260px;
+    height: 60px;
+    margin-left: 160px;
+}
+
+.company_base_info .company_base_btn:hover{
+    background-color:  #007bff;
+    transform: translateY(-4px);
+}
+
+.company_base_description {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 90px;
+    width: 1260px;
+    height: 250px;
+    /* max-width: 1200px; */
+    border-radius: 8px;
+    gap: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+
+  .company_base_description .company-left{
+    width: 300px;
+    height: 266px;
+    padding: 20px;
+    background-color: #ffffff;
+    line-height: 1.5;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 10; /* 控制显示的行数 */
+    -webkit-box-orient: vertical;
+    white-space: normal; /* 允许文本换行 */
+    text-overflow: ellipsis;
+    word-break: break-word; /* 强制长单词换行 */
+    cursor: pointer;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+  }
+
+  .company-right{
+    margin-left: -100px;
+  }
+
+.employee-grid{
+    display: flex;
+    margin-top: 20px;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.company-right .com_font{
+    cursor: pointer;
+    margin-left: 40px;
+    margin-top: 20px;
+    font-size: 30px;
+}
+.company-right .com_font:hover{
+    transform: translateY(-4px); /* Move text slightly upwards */
+}
+
+.company_base_description .company_base_btn{
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Larger text size */
+    cursor: pointer; 
+    color: #ffffff;
+    background-color: darkblue;
+    margin-top: 180px;
+    margin-right: 10px;
+    width: 260px;
+    height: 60px;
+}
+
+
+.company_base_description .company_base_btn:hover{
+    background-color:  #007bff;
+    transform: translateY(-4px);
+}

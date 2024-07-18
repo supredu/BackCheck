@@ -1,44 +1,44 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 
 import { Avatar, Tooltip ,List,Card} from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { motion } from 'framer-motion';
-
+import { getAllCompany } from '../../assets/company/company';
 import './index.css'; 
 import { assets } from '../../assets/assets';
 
 const CompanyMain = () => {
     const navigate = useNavigate();
-
+    const companies=getAllCompany()
   
-    const companies = [
-        {
-          name: 'Company A',
-          logo: `${assets.cover}`,
-        },
-        {
-          name: 'Company B',
-          logo: `${assets.cover}`,
-        },
-        {
-          name: 'Company C',
-          logo: `${assets.cover}`,
-        },
-         {
-            name: 'Company D',
-            logo: `${assets.cover}`,
-          },
-          {
-            name: 'Company E',
-            logo: `${assets.cover}`,
-          },
-          {
-            name: 'Company F',
-            logo: `${assets.cover}`,
-          },
-      ];
+    // const companies = [
+    //     {
+    //       name: 'Company A',
+    //       logo: `${assets.cover}`,
+    //     },
+    //     {
+    //       name: 'Company B',
+    //       logo: `${assets.cover}`,
+    //     },
+    //     {
+    //       name: 'Company C',
+    //       logo: `${assets.cover}`,
+    //     },
+    //      {
+    //         name: 'Company D',
+    //         logo: `${assets.cover}`,
+    //       },
+    //       {
+    //         name: 'Company E',
+    //         logo: `${assets.cover}`,
+    //       },
+    //       {
+    //         name: 'Company F',
+    //         logo: `${assets.cover}`,
+    //       },
+    //   ];
       const [items, setItems] = React.useState(companies);
 
       const handleOnDragEnd = (result) => {
@@ -52,7 +52,9 @@ const CompanyMain = () => {
   return (
    <div className='company_main_container'>
     <div className='com_main'>
-        <button className='com_main_btn' >
+        <button className='com_main_btn' onClick={()=>{
+        window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSezeuVQYO_NnoqEbFLMMBLVrT4zd0fsPy-2RnZohlUODisI3Q/viewform?usp=sf_link";
+      }}>
             Create New Company
        </button>
        <hr/>
@@ -74,10 +76,10 @@ const CompanyMain = () => {
                       {...provided.dragHandleProps}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      onClick={()=>{navigate('sub_company');}}
+                      onClick={()=>{navigate(`sub_company/${company.id}`);}}
                       layout
                     >
-                      <Avatar size={70} src={company.logo} />
+                      <Avatar size={70} src={company.image} />
                       <div className="company-details">
                         <h2>{company.name}</h2>
                       </div>

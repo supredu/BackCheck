@@ -32,6 +32,9 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+.certificate-item.hidden {
+  opacity: 0.2; /* 更暗的样式 */
+}
   .certificate-item {
     display: flex;
     align-items: center;
@@ -113,7 +116,18 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  
+  .connected-button ,.verified-button{
+    width: 100px;
+    height: 40px;
+    padding: 5px 10px;
+    margin-left: 60px;
+    background-color: rgba(0, 0, 0, 0.084);
+    color: gray;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
   .connect-button:hover, .verify-button:hover {
     background-color: #0056b3;
   }

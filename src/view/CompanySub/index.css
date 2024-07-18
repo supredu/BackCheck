@@ -30,6 +30,7 @@
 }
 
 .company_base_info .company_name{
+    width: 100px;
     cursor: pointer;
     margin-top: 40px;
     font-weight: 1000;
@@ -51,8 +52,23 @@
     margin-top: 120px;
     width: 260px;
     height: 60px;
-    margin-left: 160px;
+    margin-left: 399px;
 }
+.company_base_info .company_base_hide_btn{
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Larger text size */
+    cursor: pointer; 
+    color: #ffffff;
+    background-color: darkblue;
+    margin-top: 120px;
+    width: 260px;
+    height: 60px;
+    margin-left: 399px;
+    opacity: 0.4;
+
+}
+
 
 .company_base_info .company_base_btn:hover{
     background-color:  #007bff;
@@ -122,6 +138,19 @@
     margin-right: 10px;
     width: 260px;
     height: 60px;
+}
+.company_base_description .company_base_hide_btn{
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Larger text size */
+    cursor: pointer; 
+    color: #ffffff;
+    background-color: darkblue;
+    margin-top: 180px;
+    margin-right: 10px;
+    width: 260px;
+    height: 60px;
+    opacity: 0.4;
 }
 
 

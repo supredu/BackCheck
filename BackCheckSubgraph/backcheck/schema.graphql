@@ -1,0 +1,19 @@
+type Company @entity {
+  id: ID!
+  name: String!
+  symbol: String!
+  admin: Bytes!
+  logoURI: String!
+  createdAt: BigInt!
+  certificates: [EmployeeCertificate!] @derivedFrom(field: "company")
+}
+
+type EmployeeCertificate @entity {
+  id: ID!
+  employee: Bytes!
+  company: Company!
+  tokenId: BigInt!
+  tokenURI: String!
+  mintedAt: BigInt!
+}
+

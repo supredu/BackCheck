@@ -1,0 +1,8 @@
+{
+  "sepolia": {
+    "\\CompanyCertificate.": {
+      "address": "0xCB57190B400a1a215673BF8Cd751B90fb4e08788",
+      "startBlock": 0
+    }
+  }
+}

@@ -1,0 +1,49 @@
+specVersion: 0.0.2
+description: Company Factory and Certificate Subgraph
+repository: https://github.com/supredu/BackCheck
+schema:
+  file: ./schema.graphql
+
+dataSources:
+  - kind: ethereum/contract
+    name: CompanyFactory
+    network: scroll sepolia
+    source:
+      address: 0x84667050B7e8648A71c3722De097abEEDcc71F9e
+      abi: CompanyFactory
+      startBlock: 5540000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Company
+      abis:
+        - name: CompanyFactory
+          file: ./abis/CompanyFactory.json
+        - name: CompanyCertificate
+          file: ./abis/CompanyCertificate.json
+      eventHandlers:
+        - event: CompanyCreated(address,address)
+          handler: handleCompanyCreated
+
+  - kind: ethereum/contract
+    name: CompanyCertificate
+    network: scroll sepolia
+    source:
+      address: 0xCB57190B400a1a215673BF8Cd751B90fb4e08788
+      abi: CompanyCertificate
+      startBlock: 5540000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - EmployeeCertificate
+      abis:
+        - name: CompanyCertificate
+          file: ./abis/CompanyCertificate.json
+      eventHandlers:
+        - event: EmployeeMinted(address,uint256)
+          handler: handleEmployeeMinted
+

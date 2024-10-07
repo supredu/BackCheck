@@ -95,20 +95,13 @@
     gap: 10px;
   }
   
-  .social-media-item {
-    width: 500px;
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    /* border: 1px solid #ddd; */
-    border-radius: 4px;
-  }
+
   
-  .connect-button, .verify-button {
+  .connect-font, .verify-button {
     width: 100px;
     height: 40px;
     padding: 5px 10px;
-    margin-left: 60px;
+    margin-left: 20px;
     background-color: black;
     color: white;
     border: none;
@@ -116,25 +109,19 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  .connected-button ,.verified-button{
-    width: 100px;
-    height: 40px;
-    padding: 5px 10px;
-    margin-left: 60px;
-    background-color: rgba(0, 0, 0, 0.084);
-    color: gray;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  .connect-button:hover, .verify-button:hover {
-    background-color: #0056b3;
-  }
+ 
+ 
 
   .social_logo{
     width: 60px;
     height: 50px;
     border-radius: 20%;
     border: #333 solid 4px;
+
+  }
+  .font-litle{
+    display: inline-block;
+    margin-left: 10px;
+    font-weight: 400;
+    font-size: 30px;
   }

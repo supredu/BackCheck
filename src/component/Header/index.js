@@ -62,27 +62,45 @@ const MyHeader = ()=>{
         navigate(`/${e.key}`);
     };
     const connectWalletHandler = async () => {
-      if (window.ethereum) {
-        try {
-            // Request permissions to access accounts
+        if (typeof window.ethereum !== 'undefined') {
+          const web3 = new Web3(window.ethereum);
+      
+          try {
+            // Request permissions for accounts access
             await window.ethereum.request({
-                method: 'wallet_requestPermissions',
-                params: [{
-                    eth_accounts: {}
-                }]
+              method: 'wallet_requestPermissions',
+              params: [
+                {
+                  eth_accounts: {},
+                },
+              ],
             });
-
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            dispatch(setWalletAddress(accounts[0]));
-            dispatch(setAddress(accounts[0]));
-            console.log("Connected account:", accounts[0]);
-        } catch (error) {
-            console.error("User denied account access", error);
+      
+            // Request account connection
+            const accounts = await window.ethereum.request({
+              method: 'eth_requestAccounts',
+            });
+      
+            if (accounts.length > 0) {
+              // Set the connected wallet address
+              dispatch(setWalletAddress(accounts[0]));
+              dispatch(setAddress(accounts[0]));
+              console.log('Connected account:', accounts[0]);
+            } else {
+              console.error('No accounts found');
+            }
+          } catch (error) {
+            if (error.code === 4001) {
+              // User rejected request
+              console.error('User denied account access');
+            } else {
+              console.error('Error connecting to wallet:', error);
+            }
+          }
+        } else {
+          console.error('MetaMask is not installed. Please install it to use this app.');
         }
-    } else {
-        console.error("MetaMask is not installed. Please install it to use this app.");
-    }
-  };
+      };
 
   const switchAccount = async () => {
     navigate("/")

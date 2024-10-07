@@ -48,6 +48,8 @@ import img47 from "./people/img47.png";
 import img48 from "./people/img48.png";
 import img49 from "./people/img49.png";
 import img50 from "./people/img50.png";
+import { v4 as uuidv4 } from 'uuid';
+import { getAllCompany } from "../company/company";
 
 const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22, img23, img24, img25, img26, img27, img28, img29, img30, img31, img32, img33, img34, img35, img36, img37, img38, img39, img40, img41, img42, img43, img44, img45, img46, img47, img48, img49, img50];
 const names =["Emma", "Liam", "Olivia", "Noah", "Ava", "Elijah", "Sophia", "Oliver", "Isabella", "Mason", "Mia", "Logan", "Amelia", "James", "Charlotte", "Aiden", "Harper", "Ethan", "Evelyn", "Lucas", "Abigail", "Jackson", "Emily", "Alexander", "Madison", "Sebastian", "Aubrey", "Jacob", "Lily", "Michael", "Ella", "Benjamin", "Chloe", "Carter", "Grace", "William", "Scarlett", "Owen", "Sofia", "Daniel", "Avery", "Luke", "Mila", "Henry", "Ella", "Gabriel", "Layla", "Matthew", "Riley", "Anthony"];
@@ -61,7 +63,59 @@ const allJobSeek = images.map((img, index) => ({
 export function getAlJoobSeek() {
     return allJobSeek;
   }
-
-  export function getCompanyById(id) {
+export function getCompanyById(id) {
     return allJobSeek.find((event) => event.id === id);
+}
+
+// const certifictionInfo = {
+//   "id":  newId,
+//   "img": company.image,
+//   "name": company.name,
+//   "hidden": false
+// }
+const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+const getRandomSocialInfo = () => {
+  return getRandomElement(names);
+};
+const allCompany = getAllCompany()
+const generateCertifications = (companies) => {
+  const numCertifications = Math.floor(Math.random() * (companies.length + 1));
+  const certifications = [];
+  const usedIds = new Set(); // 用于存储已经使用过的公司的 id
+
+  for (let i = 0; i < numCertifications; i++) {
+
+      const randomCompany = getRandomElement(companies);
+      if(usedIds.has(randomCompany.id)){
+        continue
+      }
+
+        usedIds.add(randomCompany.id);
+      certifications.push({
+          id: uuidv4(),
+          img: randomCompany.image,
+          name: randomCompany.name,
+          hidden: false
+      });
   }
+  return certifications;
+};
+const generateCertificationInfo = (jobSeekers, companies) => {
+  return jobSeekers.map(jobSeeker => {
+      const randomCompany = companies[Math.floor(Math.random() * companies.length)];
+      
+      return {
+          id: jobSeeker.id,
+          certification:generateCertifications(companies),
+          Xsocial: getRandomSocialInfo(),  // Randomly assign value or empty string
+          Disocial: getRandomSocialInfo()   // Randomly assign value or empty string
+      };
+  });
+};
+// Generate job seeker certification information
+const joobSeekerCertificationInfo = generateCertificationInfo(allJobSeek, allCompany);
+
+export function getJoobById(id) {
+  return joobSeekerCertificationInfo.find((event) => event.id === id);
+}

@@ -1,18 +1,28 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import { redirect, useNavigate } from 'react-router-dom';
 
-import { Avatar, Tooltip ,List,Card} from 'antd';
+import { Avatar, Tooltip ,List,Card, Button} from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { motion } from 'framer-motion';
 import { getAllCompany } from '../../assets/company/company';
 import './index.css'; 
 import { assets } from '../../assets/assets';
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
 
 const CompanyMain = () => {
     const navigate = useNavigate();
     const companies=getAllCompany()
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const openModal = () => {
+      setModalIsOpen(true);
+    };
   
+    const closeModal = () => {
+      setModalIsOpen(false);
+    };
     // const companies = [
     //     {
     //       name: 'Company A',
@@ -51,9 +61,36 @@ const CompanyMain = () => {
       };
   return (
    <div className='company_main_container'>
+    <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Create New Company"
+        style={{
+          content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            width: '80%',
+            height: '80%'
+          }
+        }}
+      >
+        <Button onClick={closeModal}>Close</Button>
+        <iframe
+          src="https://docs.google.com/forms/d/e/1FAIpQLSezeuVQYO_NnoqEbFLMMBLVrT4zd0fsPy-2RnZohlUODisI3Q/viewform?usp=sf_link"
+          width="100%"
+          height="100%"
+          frameBorder="0"
+        ></iframe>
+      </Modal>
     <div className='com_main'>
         <button className='com_main_btn' onClick={()=>{
-        window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSezeuVQYO_NnoqEbFLMMBLVrT4zd0fsPy-2RnZohlUODisI3Q/viewform?usp=sf_link";
+          openModal()
+          console.log(`openModal: ${modalIsOpen}`)
+        // window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSezeuVQYO_NnoqEbFLMMBLVrT4zd0fsPy-2RnZohlUODisI3Q/viewform?usp=sf_link";
       }}>
             Create New Company
        </button>

@@ -21,14 +21,14 @@ import img20 from "./people/img20.png";
 import img21 from "./people/img21.png";
 import img22 from "./people/img22.png";
 import img23 from "./people/img23.png";
-
+import img24 from "./NEO.png";
 
 const ALL_COMPANY =[
     {   
         "id": "c1",
-        "name": "Scroll",
-        "description": "Scroll 是以太坊的原生 zkEVM 第 2 层解决方案。可实现对现有以太坊应用程序和工具的原生兼容。Scroll 处理链下交易，并在链上发布简洁的正确性证明。与以太坊基础层相比，这导致更高的吞吐量和更低的成本。",
-        "image": "https://public.rootdata.com/images/b16/1666624794438.jpg",
+        "name": "Neo X",
+        "description": "Neo X is an EVM-compatible sidechain creating a bridge between Neo N3 and the widely adopted EVM network",
+        "image": img24,
         "employees":[ {
             "id": "e1",
             "name": "James",

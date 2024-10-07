@@ -22,6 +22,7 @@
     width: 300px;
     height: 150px;
     border-radius: 10%;
+    border: 1px solid black;
 }
 
 .company_sub_container .company_base_info img:hover{

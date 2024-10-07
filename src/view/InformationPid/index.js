@@ -4,12 +4,16 @@ import { useLocation } from 'react-router-dom';
 import { assets } from '../../assets/assets';
 import { Tooltip } from 'antd';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { getJoobById } from '../../assets/job/jobSeek';
 
 
 
-const Information = () => {
+const InformationPid = () => {
   const location = useLocation();
-
+  const { jobSeekId } = useParams(); 
+  const JobSeekInfo = getJoobById(jobSeekId)
+  console.log(`informationId ${jobSeekId} ${JobSeekInfo.name}`)
 
   const [isDiscordConnected, setIsDiscordConnected] = useState(false);
   const [isXConnected, setIsXdConnected] = useState(false);
@@ -17,8 +21,7 @@ const Information = () => {
   const newAddress = useSelector(state=>state.address);
 
   const isLogg = useSelector(state=>state.isLoggedIn);
-  const  storedCertificates = localStorage.getItem(`${address}_certificateInfo`);
-  const certificates = storedCertificates ? JSON.parse(storedCertificates) : [];  
+  const certificates = JobSeekInfo.certification 
   const [certs, setCerts] = useState(certificates);
 
   const handleCheckboxClick = (id) => {
@@ -80,17 +83,9 @@ const Information = () => {
       <h2>My Certificate</h2>
       <div className="certificate-list">
       {certs.map(cert => (
-        <div key={cert.id} className={`certificate-item ${cert.hidden ? 'hidden' : ''}`}>
+        <div key={cert.id} className={`certificate-item`}>
           <img src={cert.img} alt="Certificate" className="certificate-image" />
           <span className="certificate-time">{cert.name}</span>
-          <Tooltip title={cert.hidden ? "点击展示" : "点击隐藏"}>
-            <input
-              type="checkbox"
-              checked={cert.hidden}
-              className="certificate-checkbox"
-              onChange={() => handleCheckboxClick(cert.id)}
-            />
-          </Tooltip>
         </div>
       ))}
       </div>
@@ -98,25 +93,20 @@ const Information = () => {
       <h2>Social Media</h2>
       <div className="social-media">
         <div className="social-media-item">
-          <img src={assets.X} className='social_logo'/>
-          {isXConnected? <button className="connected-button">Connected</button>:
-                              <button className="connect-button" onClick={handleXConnectClick}>Connect</button>}
+          <img src={assets.X} className='social_logo'/> 
+          <span className='font-litle'>: </span>
+          <button className="connect-font">{JobSeekInfo.Xsocial}</button>
+        
         </div>
         <div className="social-media-item">
-            <img src={assets.discord} className='social_logo'/>
-            {
-              isDiscordConnected? <button className="connected-button">Connected</button>:
-                <button className="connect-button" onClick={handleDiscordClick}>Connect</button>
-            }
-         
+            <img src={assets.discord} className='social_logo'/> 
+            <span className='font-litle'>: </span>
+            <button className="connect-font">{JobSeekInfo.Disocial}</button>
+           
         </div>
-        {/* <div className="social-media-item">
-            <img src={assets.Mail} className='social_logo'/>
-          <button className="verify-button">Verify</button>
-        </div> */}
       </div>
     </div>
   );
 };
 
-export default Information;
+export default InformationPid;

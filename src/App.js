@@ -10,6 +10,7 @@ import CompanyMain from './view/CompanyMain';
 import CompanySub from './view/CompanySub';
 import Talent from './view/Talent';
 import Information from './view/Information';
+import InformationPid from './view/InformationPid';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path='/company/sub_company/:companyId' element={<CompanySub/>}/>
         <Route path='/talent' element={<Talent/>}/>
         <Route path='/information' element={<Information/>}/>
+        <Route path='/talent/jobseeker/:jobSeekId' element={<InformationPid/>}/>
       </Routes>
     </div>
 

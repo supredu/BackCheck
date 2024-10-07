@@ -13,6 +13,7 @@ import { getCompanyById } from '../../assets/company/company';
 import { message } from 'antd';
 import { getAdminAddress, getCompanyAbi, getContractAddress } from '../../data/mydata';
 import {  Spin } from 'antd';
+import {  Modal,Input } from 'antd';
 
 // const company = {
 //     name: 'Company A',
@@ -44,6 +45,9 @@ const CompanySub = () => {
     const [isSpin,setIsSpin] = useState(false)
     const [isAdminSpin,setAdminSpin] = useState(false)
     const [isAdmin,setAdmin] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [inputValue,setInputValue] = useState('')
+
     useEffect(() => {
         const storedCertificates = localStorage.getItem(`${address}_certificateInfo`);
         const certificates = JSON.parse(storedCertificates);
@@ -110,8 +114,12 @@ const CompanySub = () => {
         const AMMContract = new  window.web3.eth.Contract(companyAbi,contractAddress);
         console.log(`contract: ${AMMContract}`)
         setIsSpin(true)
-        await AMMContract.methods.mintEmployeeCertificate().send({ from: address });
-
+        try {
+            const gasEstimate = await AMMContract.methods.mintEmployeeCertificate().estimateGas({ from: address });
+            await AMMContract.methods.mintEmployeeCertificate().send({ from: address, gas: gasEstimate,  gasPrice: await window.web3.eth.getGasPrice(),            });
+          } catch (error) {
+            console.error('Transaction failed:', error);
+          }
         const certifictionInfo = {
             "id":  newId,
             "img": company.image,
@@ -123,27 +131,55 @@ const CompanySub = () => {
         setIsSpin(false)
         mintSuccess()
     }
-   const handleWhiteList = async ()=>{
-    const contractAddress = getContractAddress()
-    const companyAbi = getCompanyAbi()
-    const AMMContract = new  window.web3.eth.Contract(companyAbi,contractAddress);
-    console.log(`contract: ${AMMContract}`)
-    setAdminSpin(true)
-    await AMMContract.methods.whitelistEmployee(newAddress).send({ from: newAddress });
-    const newId = uuidv4();
-    const wallInfo = {
-        "id":  newId,
-        "img": company.image,
-        "name": company.name,
-        "hidden": false
-    }
-    dispatch(addWhilelist(wallInfo));
-    setAdminSpin(false)
-    setWallButton(true)
-    addWhitelistSuccess()
+    const commitAsyncReq = async ()=>{
+        const contractAddress = getContractAddress()
+        const companyAbi = getCompanyAbi()
+        const AMMContract = new  window.web3.eth.Contract(companyAbi,contractAddress);
+        console.log(`contract: ${AMMContract}`)
+        setAdminSpin(true)
+        console.log(`whitelistEmployee前: ${inputValue} - ${newAddress}`)
+        const gasEstimate = await AMMContract.methods.whitelistEmployee(inputValue).estimateGas({ from: newAddress });
+        console.log(`估算gas: ${gasEstimate}`)
+        try {
+            const gasEstimate = await AMMContract.methods.whitelistEmployee(inputValue).estimateGas({ from: newAddress });
+            await AMMContract.methods.whitelistEmployee(inputValue).send({ from: newAddress, gas: gasEstimate,  gasPrice: await window.web3.eth.getGasPrice(),            });
+          } catch (error) {
+            console.error('Transaction failed:', error);
+          }
+         console.log(`whitelistEmployee后`)
+        const newId = uuidv4();
+        const wallInfo = {
+            "id":  newId,
+            "img": company.image,
+            "name": company.name,
+            "hidden": false
+        }
+        dispatch(addWhilelist(wallInfo));
+        setAdminSpin(false)
+        setWallButton(true)
+        addWhitelistSuccess()
+       }
+   const handleWhiteList = ()=>{
+        setIsModalOpen(true);
+
+       
    }
+   const handleOk = () => {
+    setIsModalOpen(false);
+    commitAsyncReq()
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const handleChange = (event)=>{
+    setInputValue(event.target.value);
+  }
   return (
    <div className='company_sub_container'>
+    <Modal title='Add address' open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+            <Input placeholder="please input this address"  value={inputValue} onChange={handleChange}/>
+
+    </Modal>
     {isAdminSpin?<Spin tip="Loading...">
         <div className='company_base_info'>
             <img src={company.image} className='company_img'/>
@@ -170,7 +206,6 @@ const CompanySub = () => {
          </div>
     </>}
         
-
 
          {isSpin?<Spin tip="Loading...">
             <div className='company_base_description'>
